@@ -43,7 +43,7 @@
 			</p>
 		</div>
 
-		<div class="mt-4 w-full flex flex-col items-center">
+		<div class="mt-4 w-full flex flex-col items-center mb-4">
 			<form class="flex flex-row w-full space-x-4">
 				<input
 					type="text"
