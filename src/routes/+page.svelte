@@ -1,3 +1,20 @@
+<script lang="ts">
+	import { fade } from 'svelte/transition';
+
+	let email = '';
+	let showSuccess = false;
+
+	const handleSubmit = (e: Event) => {
+		e.preventDefault();
+		showSuccess = true;
+		console.log(email);
+
+		setTimeout(() => {
+			showSuccess = false;
+		}, 5000);
+	};
+</script>
+
 <div class="flex flex-col items-center">
 	<div class="flex flex-col items-center max-w-3xl px-5">
 		<div class="text-center my-8">
@@ -44,10 +61,11 @@
 		</div>
 
 		<div class="mt-4 w-full flex flex-col items-center mb-4">
-			<form class="flex flex-row w-full space-x-4">
+			<form class="flex flex-row w-full space-x-4" on:submit={handleSubmit}>
 				<input
-					type="text"
-					id="first_name"
+					type="email"
+					bind:value={email}
+					id="email"
 					class="font-kode bg-gray-50 outline-none border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-1.5"
 					placeholder="john.doe@mail.com"
 					required
@@ -57,6 +75,23 @@
 				>
 			</form>
 		</div>
+		{#if showSuccess}
+			<div
+				class="bg-teal-50 p-1 dark:bg-teal-800/30 w-full absolute bottom-0"
+				role="alert"
+				in:fade={{ duration: 500 }}
+				out:fade={{ duration: 500 }}
+			>
+				<div class="flex">
+					<div class="ms-3">
+						<h3 class="text-gray-800 font-semibold dark:text-white">Success!</h3>
+						<p class="text-sm text-gray-700 dark:text-neutral-400">
+							You will be notified of new updates and beta releases.
+						</p>
+					</div>
+				</div>
+			</div>
+		{/if}
 	</div>
 </div>
 
